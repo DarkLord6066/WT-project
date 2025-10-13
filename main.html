@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <title>Garage Management System</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">AutoCare Garage</div>
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link active" onclick="showSection('home')">Home</a></li>
+          <li><a href="#booking" class="nav-link" onclick="showSection('booking')">Service Booking</a></li>
+          <li><a href="#tracking" class="nav-link" onclick="showSection('tracking')">Vehicle Status</a></li>
+          <li><a href="#spareparts" class="nav-link" onclick="showSection('spareparts')">Spare Parts</a></li>
+          <li><a href="#admin" class="nav-link" onclick="showSection('admin')">Admin Panel</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <section id="home" class="section active">
+        <div class="hero">
+          <h1>Welcome to AutoCare Garage</h1>
+          <p>Your Trusted Partner for Vehicle Service & Maintenance</p>
+          <button onclick="showSection('booking')" style="background-color: #007bff; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px;">Book a Service</button>
+        </div>
+
+        <div class="services-overview">
+          <h2>Our Services</h2>
+          <div class="service-grid">
+            <div class="service-card">
+              <h3>General Service</h3>
+              <p>Complete vehicle checkup and maintenance</p>
+              <span style="color: #007bff; font-weight: bold;">Starting at ₹1,500</span>
+            </div>
+            <div class="service-card">
+              <h3>Oil Change</h3>
+              <p>Premium quality engine oil replacement</p>
+              <span style="color: #007bff; font-weight: bold;">Starting at ₹800</span>
+            </div>
+            <div class="service-card">
+              <h3>Brake Service</h3>
+              <p>Complete brake inspection and repair</p>
+              <span style="color: #007bff; font-weight: bold;">Starting at ₹1,200</span>
+            </div>
+            <div class="service-card">
+              <h3>Wheel Alignment</h3>
+              <p>Precision wheel balancing and alignment</p>
+              <span style="color: #007bff; font-weight: bold;">Starting at ₹600</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="offers-section">
+          <h2>Current Offers</h2>
+          <div class="offer-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px; margin: 20px 0;">
+            <h3 style="margin: 0 0 10px 0;">Summer Special - 20% OFF</h3>
+            <p style="margin: 0 0 10px 0;">Get 20% discount on all general services this month!</p>
+            <p style="margin: 0; font-size: 14px; opacity: 0.9;">Use Code: SUMMER20</p>
+          </div>
+        </div>
+
+        <div class="testimonials">
+          <h2>Customer Testimonials</h2>
+          <div class="testimonial-grid">
+            <div class="testimonial-card">
+              <p>"Excellent service! My car runs like new. Highly recommended!"</p>
+              <strong>- Rajesh Kumar</strong>
+            </div>
+            <div class="testimonial-card">
+              <p>"Professional staff and transparent billing. Very satisfied!"</p>
+              <strong>- Priya Sharma</strong>
+            </div>
+            <div class="testimonial-card">
+              <p>"Quick turnaround time and quality work. Will come again!"</p>
+              <strong>- Amit Patel</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-section">
+          <h2>Contact Us</h2>
+          <div class="contact-info">
+            <p><strong>Address:</strong> 123 Service Road, Auto Hub, Mumbai - 400001</p>
+            <p><strong>Phone:</strong> +91 98765 43210</p>
+            <p><strong>Email:</strong> info@autocaregarage.com</p>
+            <p><strong>Working Hours:</strong> Mon - Sat: 9:00 AM - 7:00 PM</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="booking" class="section">
+        <div class="section-header">
+          <h1>Service Booking</h1>
+          <p>Book your vehicle service appointment online</p>
+        </div>
+        <div class="booking-form-container">
+          <form id="bookingForm" class="booking-form">
+            <div class="form-group">
+              <label for="customerName">Customer Name</label>
+              <input type="text" id="customerName" required placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+              <label for="vehicleNumber">Vehicle Number</label>
+              <input type="text" id="vehicleNumber" required placeholder="e.g., MH-01-AB-1234">
+            </div>
+            <div class="form-group">
+              <label for="serviceType">Service Type</label>
+              <select id="serviceType" required>
+                <option value="">Select Service</option>
+                <option value="General Service">General Service</option>
+                <option value="Oil Change">Oil Change</option>
+                <option value="Brake Service">Brake Service</option>
+                <option value="Wheel Alignment">Wheel Alignment</option>
+                <option value="AC Service">AC Service</option>
+                <option value="Battery Replacement">Battery Replacement</option>
+                <option value="Engine Repair">Engine Repair</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="serviceDate">Service Date</label>
+              <input type="date" id="serviceDate" required>
+            </div>
+            <div class="form-group">
+              <label for="serviceTime">Service Time</label>
+              <input type="time" id="serviceTime" required>
+            </div>
+            <button type="submit" style="background-color: #28a745; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; width: 100%;">Confirm Booking</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="tracking" class="section">
+        <div class="section-header">
+          <h1>Vehicle Status Tracking</h1>
+          <p>Track your vehicle service progress</p>
+        </div>
+        <div class="tracking-container">
+          <div class="tracking-form">
+            <div class="form-group">
+              <label for="trackVehicleNumber">Enter Vehicle Number</label>
+              <input type="text" id="trackVehicleNumber" placeholder="e.g., MH-01-AB-1234">
+            </div>
+            <button onclick="trackVehicle()" style="background-color: #007bff; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Track Status</button>
+          </div>
+          <div id="trackingResult" class="tracking-result"></div>
+        </div>
+      </section>
+
+      <section id="spareparts" class="section">
+        <div class="section-header">
+          <h1>Spare Parts Management</h1>
+          <p>Search and check availability of spare parts</p>
+        </div>
+        <div class="spareparts-container">
+          <div class="spareparts-search">
+            <div class="form-group">
+              <label for="partSearch">Search Part</label>
+              <select id="partSearch" onchange="searchPart()">
+                <option value="">Select a part</option>
+                <option value="Engine Oil">Engine Oil</option>
+                <option value="Brake Pads">Brake Pads</option>
+                <option value="Air Filter">Air Filter</option>
+                <option value="Battery">Battery</option>
+                <option value="Spark Plugs">Spark Plugs</option>
+                <option value="Clutch Plate">Clutch Plate</option>
+                <option value="Radiator">Radiator</option>
+                <option value="Headlight">Headlight</option>
+              </select>
+            </div>
+          </div>
+          <div id="partResult" class="part-result"></div>
+
+          <div class="parts-table-container">
+            <h3>Available Parts Inventory</h3>
+            <table class="parts-table">
+              <thead>
+                <tr>
+                  <th>Part Name</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="partsTableBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="admin" class="section">
+        <div class="section-header">
+          <h1>Admin Panel</h1>
+          <p>Billing & Work Management</p>
+        </div>
+
+        <div id="loginContainer" class="login-container">
+          <div class="login-box">
+            <h2>Admin Login</h2>
+            <form id="loginForm" class="login-form">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required placeholder="Enter username">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter password">
+              </div>
+              <button type="submit" style="background-color: #007bff; color: white; padding: 12px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; width: 100%;">Login</button>
+            </form>
+            <p style="margin-top: 15px; font-size: 14px; color: #666;">Demo credentials: admin / 1234</p>
+          </div>
+        </div>
+
+        <div id="adminDashboard" class="admin-dashboard" style="display: none;">
+          <div class="admin-header">
+            <h2>Welcome, Admin</h2>
+            <button onclick="logout()" style="background-color: #dc3545; color: white; padding: 8px 20px; border: none; border-radius: 5px; cursor: pointer;">Logout</button>
+          </div>
+
+          <div class="admin-tabs">
+            <button class="tab-btn active" onclick="showAdminTab('work')">Work Section</button>
+            <button class="tab-btn" onclick="showAdminTab('billing')">Billing Section</button>
+          </div>
+
+          <div id="workTab" class="admin-tab-content active">
+            <h3>Work Management</h3>
+            <div class="work-assignment">
+              <h4>Assign New Job</h4>
+              <form id="workForm" class="work-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="workVehicle">Vehicle Number</label>
+                    <input type="text" id="workVehicle" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="workType">Work Type</label>
+                    <select id="workType" required>
+                      <option value="">Select Work</option>
+                      <option value="General Service">General Service</option>
+                      <option value="Engine Repair">Engine Repair</option>
+                      <option value="Body Work">Body Work</option>
+                      <option value="Paint Job">Paint Job</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="mechanicName">Mechanic Name</label>
+                    <input type="text" id="mechanicName" required>
+                  </div>
+                </div>
+                <button type="submit" style="background-color: #28a745; color: white; padding: 10px 25px; border: none; border-radius: 5px; cursor: pointer;">Assign Work</button>
+              </form>
+            </div>
+
+            <div class="ongoing-work">
+              <h4>Ongoing Work</h4>
+              <table class="work-table">
+                <thead>
+                  <tr>
+                    <th>Vehicle No.</th>
+                    <th>Work Type</th>
+                    <th>Mechanic</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="workTableBody">
+                  <tr>
+                    <td>MH-01-AB-1234</td>
+                    <td>General Service</td>
+                    <td>Raju Kumar</td>
+                    <td>
+                      <span class="status-badge" style="background-color: #ffc107; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px;">In Progress</span>
+                      <button class="complete-btn" style="margin-left:10px; padding:4px 10px; font-size:12px; cursor:pointer; background-color:#28a745; color:white; border:none; border-radius:5px;">Mark as Completed</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>DL-02-CD-5678</td>
+                    <td>Engine Repair</td>
+                    <td>Suresh Yadav</td>
+                    <td><span style="background-color: #28a745; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px;">Completed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="billingTab" class="admin-tab-content">
+            <h3>Billing Management</h3>
+            <div class="billing-form-section">
+              <h4>Generate Bill</h4>
+              <form id="billingForm" class="billing-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="billVehicle">Vehicle Number</label>
+                    <input type="text" id="billVehicle" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="billCustomer">Customer Name</label>
+                    <input type="text" id="billCustomer" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="billService">Service</label>
+                    <input type="text" id="billService" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="billAmount">Amount (₹)</label>
+                    <input type="number" id="billAmount" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="billParts">Parts Cost (₹)</label>
+                    <input type="number" id="billParts" value="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="billDiscount">Discount (%)</label>
+                    <input type="number" id="billDiscount" value="0" min="0" max="100">
+                  </div>
+                </div>
+                <button type="submit" style="background-color: #007bff; color: white; padding: 10px 25px; border: none; border-radius: 5px; cursor: pointer;">Generate Bill</button>
+              </form>
+            </div>
+
+            <div id="billDisplay" class="bill-display"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2024 AutoCare Garage Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+const spareParts = [
+  { name: 'Engine Oil', price: 450, stock: 25, status: 'Available' },
+  { name: 'Brake Pads', price: 1200, stock: 15, status: 'Available' },
+  { name: 'Air Filter', price: 300, stock: 30, status: 'Available' },
+  { name: 'Battery', price: 4500, stock: 8, status: 'Available' },
+  { name: 'Spark Plugs', price: 250, stock: 40, status: 'Available' },
+  { name: 'Clutch Plate', price: 3500, stock: 5, status: 'Low Stock' },
+  { name: 'Radiator', price: 5500, stock: 3, status: 'Low Stock' },
+  { name: 'Headlight', price: 2200, stock: 12, status: 'Available' }
+];
+
+const vehicleStatus = {
+  'MH-01-AB-1234': { status: 'In Progress', stage: 2, customer: 'Rajesh Kumar', service: 'General Service' },
+  'DL-02-CD-5678': { status: 'Completed', stage: 3, customer: 'Amit Sharma', service: 'Engine Repair' },
+  'MH-03-XY-9999': { status: 'Received', stage: 1, customer: 'Priya Patel', service: 'Oil Change' },
+  'KA-05-ZZ-7777': { status: 'In Progress', stage: 2, customer: 'Sunil Gupta', service: 'Brake Service' }
+};
+
+function showSection(sectionId) {
+  const sections = document.querySelectorAll('.section');
+  sections.forEach(section => {
+    section.classList.remove('active');
+  });
+
+  document.getElementById(sectionId).classList.add('active');
+
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+  });
+
+  event.target.classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadPartsTable();
+
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('customerName').value;
+    const vehicle = document.getElementById('vehicleNumber').value;
+    const service = document.getElementById('serviceType').value;
+    const date = document.getElementById('serviceDate').value;
+    const time = document.getElementById('serviceTime').value;
+
+    alert(`Booking Confirmed!\n\nCustomer: ${name}\nVehicle: ${vehicle}\nService: ${service}\nDate: ${date}\nTime: ${time}\n\nThank you for booking with AutoCare Garage!`);
+
+    this.reset();
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === 'admin' && password === '1234') {
+      document.getElementById('loginContainer').style.display = 'none';
+      document.getElementById('adminDashboard').style.display = 'block';
+      alert('Login Successful! Welcome Admin.');
+    } else {
+      alert('Invalid username or password!\n\nPlease use:\nUsername: admin\nPassword: 1234');
+    }
+  });
+
+  document.getElementById('workForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const vehicle = document.getElementById('workVehicle').value;
+    const workType = document.getElementById('workType').value;
+    const mechanic = document.getElementById('mechanicName').value;
+
+    const tableBody = document.getElementById('workTableBody');
+    const newRow = tableBody.insertRow(0);
+
+    newRow.innerHTML = `
+      <td>${vehicle}</td>
+      <td>${workType}</td>
+      <td>${mechanic}</td>
+      <td>
+        <span class="status-badge" style="background-color: #ffc107; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px;">In Progress</span>
+        <button class="complete-btn" style="margin-left:10px; padding:4px 10px; font-size:12px; cursor:pointer; background-color:#28a745; color:white; border:none; border-radius:5px;">Mark as Completed</button>
+      </td>
+    `;
+
+    alert(`Work Assigned Successfully!\n\nVehicle: ${vehicle}\nWork Type: ${workType}\nMechanic: ${mechanic}`);
+
+    this.reset();
+  });
+
+  // Event listener for the "Mark as Completed" buttons
+  document.getElementById('workTableBody').addEventListener('click', function(e) {
+    if (e.target && e.target.classList.contains('complete-btn')) {
+        const row = e.target.closest('tr');
+        if (row) {
+            const statusCell = row.cells[3];
+            statusCell.innerHTML = `<span style="background-color: #28a745; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px;">Completed</span>`;
+        }
+    }
+  });
+
+  document.getElementById('billingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const vehicle = document.getElementById('billVehicle').value;
+    const customer = document.getElementById('billCustomer').value;
+    const service = document.getElementById('billService').value;
+    const amount = parseFloat(document.getElementById('billAmount').value);
+    const parts = parseFloat(document.getElementById('billParts').value);
+    const discount = parseFloat(document.getElementById('billDiscount').value);
+
+    const subtotal = amount + parts;
+    const discountAmount = (subtotal * discount) / 100;
+    const tax = ((subtotal - discountAmount) * 18) / 100;
+    const total = subtotal - discountAmount + tax;
+
+    const billDate = new Date().toLocaleDateString('en-IN');
+    const billNumber = 'INV-' + Math.floor(Math.random() * 10000);
+
+    const billDisplay = document.getElementById('billDisplay');
+    billDisplay.innerHTML = `
+      <div class="bill-header">
+        <h2>AutoCare Garage</h2>
+        <p>123 Service Road, Auto Hub, Mumbai - 400001</p>
+        <p>Phone: +91 98765 43210</p>
+      </div>
+      <div class="bill-details">
+        <div class="bill-row">
+          <strong>Bill No:</strong>
+          <span>${billNumber}</span>
+        </div>
+        <div class="bill-row">
+          <strong>Date:</strong>
+          <span>${billDate}</span>
+        </div>
+        <div class="bill-row">
+          <strong>Customer Name:</strong>
+          <span>${customer}</span>
+        </div>
+        <div class="bill-row">
+          <strong>Vehicle Number:</strong>
+          <span>${vehicle}</span>
+        </div>
+        <div class="bill-row">
+          <strong>Service:</strong>
+          <span>${service}</span>
+        </div>
+        <hr style="margin: 20px 0;">
+        <div class="bill-row">
+          <strong>Service Charge:</strong>
+          <span>₹${amount.toFixed(2)}</span>
+        </div>
+        <div class="bill-row">
+          <strong>Parts Cost:</strong>
+          <span>₹${parts.toFixed(2)}</span>
+        </div>
+        <div class="bill-row">
+          <strong>Subtotal:</strong>
+          <span>₹${subtotal.toFixed(2)}</span>
+        </div>
+        <div class="bill-row">
+          <strong>Discount (${discount}%):</strong>
+          <span style="color: #dc3545;">-₹${discountAmount.toFixed(2)}</span>
+        </div>
+        <div class="bill-row">
+          <strong>GST (18%):</strong>
+          <span>₹${tax.toFixed(2)}</span>
+        </div>
+      </div>
+      <div class="bill-total">
+        Total Amount: ₹${total.toFixed(2)}
+      </div>
+      <p style="text-align: center; margin-top: 30px; color: #666;">Thank you for your business!</p>
+    `;
+
+    alert('Bill Generated Successfully!');
+  });
+});
+
+function trackVehicle() {
+  const vehicleNumber = document.getElementById('trackVehicleNumber').value.trim().toUpperCase();
+  const resultDiv = document.getElementById('trackingResult');
+
+  if (!vehicleNumber) {
+    alert('Please enter a vehicle number!');
+    return;
+  }
+
+  const vehicle = vehicleStatus[vehicleNumber];
+
+  if (vehicle) {
+    const stages = [
+      { name: 'Vehicle Received', class: vehicle.stage >= 1 ? 'completed' : 'pending' },
+      { name: 'Service In Progress', class: vehicle.stage >= 2 ? (vehicle.stage === 2 ? 'current' : 'completed') : 'pending' },
+      { name: 'Service Completed', class: vehicle.stage >= 3 ? 'completed' : 'pending' }
+    ];
+
+    let timeline = '';
+    stages.forEach(stage => {
+      timeline += `
+        <div class="timeline-item">
+          <div class="timeline-dot ${stage.class}"></div>
+          <div>${stage.name}</div>
+        </div>
+      `;
+    });
+
+    resultDiv.innerHTML = `
+      <div class="status-card">
+        <h3>Vehicle Status: ${vehicle.status}</h3>
+        <p><strong>Vehicle Number:</strong> ${vehicleNumber}</p>
+        <p><strong>Customer:</strong> ${vehicle.customer}</p>
+        <p><strong>Service Type:</strong> ${vehicle.service}</p>
+        <div class="status-timeline">
+          ${timeline}
+        </div>
+      </div>
+    `;
+  } else {
+    resultDiv.innerHTML = `
+      <div class="status-card" style="background-color: #fff3cd; border-left: 4px solid #ffc107;">
+        <h3>No Record Found</h3>
+        <p>Vehicle number <strong>${vehicleNumber}</strong> is not found in our system.</p>
+        <p style="margin-top: 15px;">Please check the vehicle number or contact us for more information.</p>
+      </div>
+    `;
+  }
+}
+
+function searchPart() {
+  const partName = document.getElementById('partSearch').value;
+  const resultDiv = document.getElementById('partResult');
+
+  if (!partName) {
+    resultDiv.innerHTML = '';
+    return;
+  }
+
+  const part = spareParts.find(p => p.name === partName);
+
+  if (part) {
+    const statusColor = part.status === 'Available' ? '#28a745' : '#ffc107';
+
+    resultDiv.innerHTML = `
+      <div class="part-info-card">
+        <h3>${part.name}</h3>
+        <p><strong>Price:</strong> ₹${part.price}</p>
+        <p><strong>Stock Available:</strong> ${part.stock} units</p>
+        <p><strong>Status:</strong> <span style="color: ${statusColor}; font-weight: bold;">${part.status}</span></p>
+      </div>
+    `;
+  }
+}
+
+function loadPartsTable() {
+  const tableBody = document.getElementById('partsTableBody');
+
+  spareParts.forEach(part => {
+    const row = tableBody.insertRow();
+    const statusColor = part.status === 'Available' ? '#28a745' : '#ffc107';
+
+    row.innerHTML = `
+      <td>${part.name}</td>
+      <td>₹${part.price}</td>
+      <td>${part.stock} units</td>
+      <td><span style="color: ${statusColor}; font-weight: bold;">${part.status}</span></td>
+    `;
+  });
+}
+
+function showAdminTab(tab) {
+  const tabs = document.querySelectorAll('.admin-tab-content');
+  tabs.forEach(t => {
+    t.classList.remove('active');
+  });
+
+  const buttons = document.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  if (tab === 'work') {
+    document.getElementById('workTab').classList.add('active');
+    event.target.classList.add('active');
+  } else if (tab === 'billing') {
+    document.getElementById('billingTab').classList.add('active');
+    event.target.classList.add('active');
+  }
+}
+
+function logout() {
+  document.getElementById('loginContainer').style.display = 'flex';
+  document.getElementById('adminDashboard').style.display = 'none';
+  document.getElementById('username').value = '';
+  document.getElementById('password').value = '';
+  alert('Logged out successfully!');
+}
+    </script>
+  </body>
+</html>
