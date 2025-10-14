@@ -151,8 +151,8 @@
 
       <section id="spareparts" class="section">
         <div class="section-header">
-          <h1>Spare Parts Management</h1>
-          <p>Search, add, and manage availability of spare parts</p>
+          <h1>Spare Parts Catalogue</h1>
+          <p>Search for available spare parts and check their prices</p>
         </div>
         <div class="spareparts-container">
           <div class="spareparts-search">
@@ -164,42 +164,6 @@
             </div>
           </div>
           <div id="partResult" class="part-result"></div>
-
-          <div class="add-part-container" style="margin-top: 40px; margin-bottom: 40px;">
-            <h3>Add New Spare Part</h3>
-            <form id="addPartForm" class="add-part-form" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
-              <div class="form-group" style="flex: 2; min-width: 200px;">
-                <label for="newPartName">Part Name</label>
-                <input type="text" id="newPartName" required placeholder="e.g., Oil Filter">
-              </div>
-              <div class="form-group" style="flex: 1; min-width: 120px;">
-                <label for="newPartPrice">Price (₹)</label>
-                <input type="number" id="newPartPrice" required placeholder="e.g., 500" min="0">
-              </div>
-              <div class="form-group" style="flex: 1; min-width: 120px;">
-                <label for="newPartStock">Stock</label>
-                <input type="number" id="newPartStock" required placeholder="e.g., 20" min="0">
-              </div>
-              <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; height: 44px;">Add Part</button>
-            </form>
-          </div>
-
-          <div class="parts-table-container">
-            <h3>Available Parts Inventory</h3>
-            <table class="parts-table">
-              <thead>
-                <tr>
-                  <th>Part Name</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="partsTableBody">
-              </tbody>
-            </table>
-          </div>
         </div>
       </section>
 
@@ -236,6 +200,7 @@
           <div class="admin-tabs">
             <button class="tab-btn active" onclick="showAdminTab('work')">Work Section</button>
             <button class="tab-btn" onclick="showAdminTab('billing')">Billing Section</button>
+            <button class="tab-btn" onclick="showAdminTab('parts')">Spare Parts</button>
           </div>
 
           <div id="workTab" class="admin-tab-content active">
@@ -340,6 +305,46 @@
 
             <div id="billDisplay" class="bill-display"></div>
           </div>
+
+          <div id="partsTab" class="admin-tab-content">
+            <h3>Spare Parts Inventory Management</h3>
+            <div class="add-part-container" style="margin-top: 40px; margin-bottom: 40px;">
+              <h4>Add New Spare Part</h4>
+              <form id="addPartForm" class="add-part-form" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
+                <div class="form-group" style="flex: 2; min-width: 200px;">
+                  <label for="newPartName">Part Name</label>
+                  <input type="text" id="newPartName" required placeholder="e.g., Oil Filter">
+                </div>
+                <div class="form-group" style="flex: 1; min-width: 120px;">
+                  <label for="newPartPrice">Price (₹)</label>
+                  <input type="number" id="newPartPrice" required placeholder="e.g., 500" min="0">
+                </div>
+                <div class="form-group" style="flex: 1; min-width: 120px;">
+                  <label for="newPartStock">Stock</label>
+                  <input type="number" id="newPartStock" required placeholder="e.g., 20" min="0">
+                </div>
+                <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; height: 44px;">Add Part</button>
+              </form>
+            </div>
+
+            <div class="parts-table-container">
+              <h4>Available Parts Inventory</h4>
+              <table class="parts-table">
+                <thead>
+                  <tr>
+                    <th>Part Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="partsTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
       </section>
     </main>
@@ -710,11 +715,13 @@ function showAdminTab(tab) {
 
   if (tab === 'work') {
     document.getElementById('workTab').classList.add('active');
-    event.target.classList.add('active');
   } else if (tab === 'billing') {
     document.getElementById('billingTab').classList.add('active');
-    event.target.classList.add('active');
+  } else if (tab === 'parts') {
+    document.getElementById('partsTab').classList.add('active');
   }
+  
+  event.target.classList.add('active');
 }
 
 function logout() {
