@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <title>Garage Management System</title>
@@ -152,7 +152,7 @@
       <section id="spareparts" class="section">
         <div class="section-header">
           <h1>Spare Parts Management</h1>
-          <p>Search and check availability of spare parts</p>
+          <p>Search, add, and manage availability of spare parts</p>
         </div>
         <div class="spareparts-container">
           <div class="spareparts-search">
@@ -160,18 +160,29 @@
               <label for="partSearch">Search Part</label>
               <select id="partSearch" onchange="searchPart()">
                 <option value="">Select a part</option>
-                <option value="Engine Oil">Engine Oil</option>
-                <option value="Brake Pads">Brake Pads</option>
-                <option value="Air Filter">Air Filter</option>
-                <option value="Battery">Battery</option>
-                <option value="Spark Plugs">Spark Plugs</option>
-                <option value="Clutch Plate">Clutch Plate</option>
-                <option value="Radiator">Radiator</option>
-                <option value="Headlight">Headlight</option>
               </select>
             </div>
           </div>
           <div id="partResult" class="part-result"></div>
+
+          <div class="add-part-container" style="margin-top: 40px; margin-bottom: 40px;">
+            <h3>Add New Spare Part</h3>
+            <form id="addPartForm" class="add-part-form" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
+              <div class="form-group" style="flex: 2; min-width: 200px;">
+                <label for="newPartName">Part Name</label>
+                <input type="text" id="newPartName" required placeholder="e.g., Oil Filter">
+              </div>
+              <div class="form-group" style="flex: 1; min-width: 120px;">
+                <label for="newPartPrice">Price (₹)</label>
+                <input type="number" id="newPartPrice" required placeholder="e.g., 500" min="0">
+              </div>
+              <div class="form-group" style="flex: 1; min-width: 120px;">
+                <label for="newPartStock">Stock</label>
+                <input type="number" id="newPartStock" required placeholder="e.g., 20" min="0">
+              </div>
+              <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; height: 44px;">Add Part</button>
+            </form>
+          </div>
 
           <div class="parts-table-container">
             <h3>Available Parts Inventory</h3>
@@ -182,6 +193,7 @@
                   <th>Price</th>
                   <th>Stock</th>
                   <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody id="partsTableBody">
@@ -373,8 +385,52 @@ function showSection(sectionId) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// Renders the table with current spare parts data
+function renderPartsTable() {
+    const tableBody = document.getElementById('partsTableBody');
+    tableBody.innerHTML = ''; // Clear existing table rows
+
+    spareParts.forEach((part, index) => {
+        const row = tableBody.insertRow();
+        const status = part.stock > 5 ? 'Available' : 'Low Stock';
+        part.status = status; // Update status in the main array
+        const statusColor = status === 'Available' ? '#28a745' : '#ffc107';
+
+        row.innerHTML = `
+            <td>${part.name}</td>
+            <td>₹${part.price}</td>
+            <td>${part.stock} units</td>
+            <td><span style="color: ${statusColor}; font-weight: bold;">${status}</span></td>
+            <td>
+                <button class="remove-part-btn" data-index="${index}" style="padding: 5px 10px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">Remove</button>
+            </td>
+        `;
+    });
+}
+
+// Renders the search dropdown with current spare parts
+function renderPartsDropdown() {
+    const searchSelect = document.getElementById('partSearch');
+    searchSelect.innerHTML = '<option value="">Select a part</option>'; // Reset dropdown
+
+    spareParts.forEach(part => {
+        const option = document.createElement('option');
+        option.value = part.name;
+        option.textContent = part.name;
+        searchSelect.appendChild(option);
+    });
+}
+
+// A single function to refresh all UI elements related to parts
+function refreshPartsUI() {
+    renderPartsTable();
+    renderPartsDropdown();
+    // Clear search result when list is updated
+    document.getElementById('partResult').innerHTML = '';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-  loadPartsTable();
+  refreshPartsUI(); // Initial load of parts table and dropdown
 
   document.getElementById('bookingForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -405,6 +461,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  document.getElementById('addPartForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nameInput = document.getElementById('newPartName');
+        const priceInput = document.getElementById('newPartPrice');
+        const stockInput = document.getElementById('newPartStock');
+
+        const name = nameInput.value.trim();
+        const price = parseFloat(priceInput.value);
+        const stock = parseInt(stockInput.value, 10);
+
+        if (!name || isNaN(price) || isNaN(stock) || price < 0 || stock < 0) {
+            alert('Please fill all fields correctly with valid numbers.');
+            return;
+        }
+
+        if (spareParts.some(part => part.name.toLowerCase() === name.toLowerCase())) {
+            alert(`Part "${name}" already exists in the inventory.`);
+            return;
+        }
+
+        const newPart = {
+            name: name,
+            price: price,
+            stock: stock,
+            status: stock > 5 ? 'Available' : 'Low Stock'
+        };
+
+        spareParts.push(newPart);
+        alert(`Successfully added "${name}" to inventory.`);
+
+        refreshPartsUI();
+        this.reset();
+    });
+
+    document.getElementById('partsTableBody').addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('remove-part-btn')) {
+            const partIndex = parseInt(e.target.dataset.index, 10);
+            const partName = spareParts[partIndex].name;
+
+            if (confirm(`Are you sure you want to remove "${partName}"?`)) {
+                spareParts.splice(partIndex, 1);
+                refreshPartsUI();
+                alert(`"${partName}" has been removed.`);
+            }
+        }
+    });
+
   document.getElementById('workForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -430,7 +534,6 @@ document.addEventListener('DOMContentLoaded', function() {
     this.reset();
   });
 
-  // Event listener for the "Mark as Completed" buttons
   document.getElementById('workTableBody').addEventListener('click', function(e) {
     if (e.target && e.target.classList.contains('complete-btn')) {
         const row = e.target.closest('tr');
@@ -592,22 +695,6 @@ function searchPart() {
       </div>
     `;
   }
-}
-
-function loadPartsTable() {
-  const tableBody = document.getElementById('partsTableBody');
-
-  spareParts.forEach(part => {
-    const row = tableBody.insertRow();
-    const statusColor = part.status === 'Available' ? '#28a745' : '#ffc107';
-
-    row.innerHTML = `
-      <td>${part.name}</td>
-      <td>₹${part.price}</td>
-      <td>${part.stock} units</td>
-      <td><span style="color: ${statusColor}; font-weight: bold;">${part.status}</span></td>
-    `;
-  });
 }
 
 function showAdminTab(tab) {
